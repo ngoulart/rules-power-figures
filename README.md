@@ -1,7 +1,9 @@
-# Code behind the paper figures (Carvalho, Monte, and Ornelas)
+# Code behind the figures of "Equilibrium Trade Regimes: Power- vs. Rules-Based"
 
-This folder collects the code, data, and final images of the figures listed in
-`Figuras_papers.pdf`. The document `report/main.pdf` explains the model as coded,
+This folder collects the code, data, and final images of the figures of
+Carvalho, Monte, and Ornelas, "Equilibrium Trade Regimes: Power- vs.
+Rules-Based" (CEPR DP 20751), plus Figure 1 of its Papers and Proceedings
+(P&P) companion, which is Figure 2.1 in the list `Figuras_papers.pdf`. The document `report/main.pdf` explains the model as coded,
 the parameter values of every figure, and the numerical procedure.
 
 ## Map from figure to code
@@ -11,7 +13,7 @@ the parameter values of every figure, and the numerical procedure.
 | 1.4 Symmetric Markovian equilibria | `matlab/main_RPC.m` | `data/main_2112.mat` | `make_figures.m` | `figures/fig_1_4_symmetric_markovian.png` |
 | 1.5 Efficient and inefficient equilibria | `matlab/main_RPC.m` | `data/main_2112.mat` | `make_figures.m` + `legend_merger.py` | `figures/fig_1_5_efficient_inefficient.png` |
 | 1.6 Rules-resistant and rules-compatible power-based equilibria | `matlab/main_RPC.m` | `data/main_2112.mat` | `make_figures.m` + `legend_merger.py` | `figures/fig_1_6_rules_resistant_compatible.png` |
-| Figure 6 of the main paper (Equilibrium Trade Regimes: Power- vs. Rules-Based, CEPR DP 20751), Rules-based equilibria in a bipolar world (two-leader model) | `matlab/main_RPC_dotProduct_twoLeader.m` | `data/twoLeaders_1519.mat` | `make_figures.m` | `figures/fig_6_bipolar_world.png` |
+| 6 Rules-based equilibria in a bipolar world (two-leader model) | `matlab/main_RPC_dotProduct_twoLeader.m` | `data/twoLeaders_1519.mat` | `make_figures.m` | `figures/fig_6_bipolar_world.png` |
 | 1.9 Sustainability of a rules-lite regime, c = 1.5 | `matlab/main_uRDelta.m` | `data/main_kappa15_c15.mat` | `make_figures.m` | `figures/fig_1_9_rules_lite_c15.png` |
 | 1.B.3 Enduring dominance | `matlab/main_RPC_changingQ22.m` | `data/prop4_{35,60,85,99}.mat` | `make_figures.m` + `image_merger.py` | `figures/fig_1_B_3_enduring_dominance.png` |
 | 1.F.1 Equilibria under endogenous transitions | `matlab/main_RPC_newEndogenous.m` | `data/endogenous_2213.mat` | `make_figures.m` | `figures/fig_1_F_1_endogenous_transitions.png` |
@@ -36,7 +38,7 @@ the parameter values of every figure, and the numerical procedure.
 `python/check_pure_equilibria.py` re-derives the pure-strategy classification
 of every map with plain linear algebra (no MATLAB) and checks it against the
 `.mat` files; it agrees on 100% of the pure-strategy cells.
-`python/check_two_leaders.py` does the same for the two-leader model of the main paper's
+`python/check_two_leaders.py` does the same for the two-leader model of
 Figure 6 (99.99%: the only two exceptions are cells the solver itself flagged
 as ambiguous, which are drawn red either way).
 

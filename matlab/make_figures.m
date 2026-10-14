@@ -8,7 +8,7 @@
 %   main_RPC_changingQ22.m   -> prop4_{35,60,85,99}.mat (Figure 1.B.3)
 %   main_RPC_newEndogenous.m -> endogenous_2213.mat    (Figure 1.F.1)
 %   main_uRDelta.m           -> main_kappa15_c15.mat   (Figure 1.9)
-%   main_RPC_dotProduct_twoLeader.m -> twoLeaders_1519.mat (Figure 6 of the main paper, two-leader model)
+%   main_RPC_dotProduct_twoLeader.m -> twoLeaders_1519.mat (Figure 6, two-leader model)
 % The solver scripts save into the current folder; move their .mat output to data/.
 %
 % Post-processing in Python (run after this script, from the same folder):
@@ -48,6 +48,6 @@ plot_map(data.matrix_lambda1, data.matrix_lambda2, 'plot_endogenous.png', false,
 data = load('data/main_kappa15_c15.mat');
 plot_map_gamma(data.matrix_lambda1, data.matrix_lambda2, data.naMask, 'rules_lite_c15.png', false, true);
 
-% Figure 6 of the main paper (Rules-based equilibria in a bipolar world): two-leader model, three classes
+% Figure 6 (Rules-based equilibria in a bipolar world): two-leader model, three classes
 data = load('data/twoLeaders_1519.mat');
 plot_map_twoLeaders(data.matrix_lambda1, data.matrix_lambda2, data.matrix_lambdaNR, 'plot_twoLeaders_three.png', false, false);

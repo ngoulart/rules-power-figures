@@ -16,9 +16,9 @@ $k = 0.1$, $u_R = 1$, the transition matrix $Q$ above, and the grid of
 Figure & Axes & Departure from the baseline \\
 \midrule
 1.4 & $c \in [0, 5]$, $\delta \in [0, 1]$ & none \\
-Main paper, Figure 6 & $c \in [0, 5]$, $\delta \in [0, 1]$ & two-leader variant: fifth state $N$, $5 \times 5$ transition matrix, payoffs at $N$ by action pair, third probability $\lambda_N$ (\Cref{sec:model}) \\
 1.5 & same data as 1.4 & white curve $c = f(\delta)$, the planner's threshold (\Cref{sec:fig15}) \\
 1.6 & same data as 1.4 & four-class colors and the same white curve \\
+6 & $c \in [0, 5]$, $\delta \in [0, 1]$ & two-leader variant: fifth state $N$, $5 \times 5$ transition matrix, payoffs at $N$ by action pair, third probability $\lambda_N$ (\Cref{sec:model}) \\
 1.9 & $\gamma \in [0, 0.1]$, $\delta \in [0, 1]$ & $c = 1.5$; rules payoffs $(1 + \gamma,\, 1 + \gamma,\, 1 - \kappa\gamma,\, 1 - \kappa\gamma)$ at $(\hI, \dI, \dJ, \hJ)$ with $\kappa = 1.5$ \\
 1.B.3 & $c \in [0, 5]$, $\delta \in [0, 1]$ & $q_{\dI,\dI} = q_{\dJ,\dJ} = q \in \{0.35, 0.60, 0.85, 0.99\}$, with rows $Q_{\dI} = (\tfrac{1-q}{2}, q, \tfrac{1-q}{2}, 0)$ and $Q_{\dJ} = (0, \tfrac{1-q}{2}, q, \tfrac{1-q}{2})$ \\
 1.F.1 & $c \in [0, 5]$, $\delta \in [0, 1]$ & under power, $Q^P_{\dI} = (0.45, 0.10 + \eta, 0.45 - \eta, 0)$ and $Q^P_{\dJ} = (0, 0.45 - \eta, 0.10 + \eta, 0.45)$ with $\eta = \bar\eta = 0.45$; under rules, $Q$ as in the baseline \\
@@ -140,6 +140,38 @@ $\rightarrow$ \code{legend\_merger.py}.
 \end{figure}
 
 \FloatBarrier
+\subsection{Figure 6, Rules-based equilibria in a bipolar world}
+\label{sec:fig6}
+
+\code{main\_RPC\_dotProduct\_twoLeader.m} solves the two-leader variant of
+\Cref{sec:model} on the same $(c, \delta)$ grid, with $k = 0.1$, $u_R = 1$,
+and the five-state transition matrix, and saves
+\code{twoLeaders\_1519.mat}, which holds the three strategy matrices.
+\code{make\_figures.m} draws it with \code{plot\_map\_twoLeaders.m} as a
+three-class map and no overlay (\Cref{fig:6}). The figure looks like
+Figure 1.4 but is a different run: rules now also have to survive the
+multipolar state, where each leader gains $k$ in the short run from playing
+power and the regime collapses unless both refrain. The cyclic region is
+therefore larger (it reaches about $\delta = 0.45$ at $c = 1$, against
+$0.2$ in Figure 1.4) and the rules-based region starts at higher $\delta$
+for every $c$. The solver found mixed strategies in a thinner band than in
+the baseline.
+
+\begin{figure}[htbp]
+\centering
+\includegraphics[width=0.62\linewidth]{fig_6_bipolar_world.png}
+\caption{Figure 6, Rules-based equilibria in a bipolar world (two-leader model)}
+\label{fig:6}
+\begin{minipage}{0.9\linewidth}
+\vspace{4pt}
+\footnotesize\raggedright
+\textit{Notes:} \code{main\_RPC\_dotProduct\_twoLeader.m} $\rightarrow$
+\code{twoLeaders\_1519.mat} $\rightarrow$
+\code{plot\_map\_twoLeaders(\ldots, 'plot\_twoLeaders\_three.png', false, false)}.
+\end{minipage}
+\end{figure}
+
+\FloatBarrier
 \subsection{Figure 1.9, Sustainability of a rules-lite regime with $c = 1.5$}
 \label{sec:fig19}
 
@@ -251,40 +283,6 @@ this run.
 \textit{Notes:} \code{main\_RPC\_newEndogenous.m} ($\eta = 0.45$)
 $\rightarrow$ \code{endogenous\_2213.mat} $\rightarrow$
 \code{plot\_map(\ldots, 'plot\_endogenous.png', false, true)}.
-\end{minipage}
-\end{figure}
-
-\FloatBarrier
-\subsection{Figure 6 of the main paper, Rules-based equilibria in a bipolar world}
-\label{sec:fig6}
-
-This figure belongs to the main paper, ``Equilibrium Trade Regimes: Power-
-vs. Rules-Based'' (Carvalho, Monte, and Ornelas, CEPR DP 20751).
-\code{main\_RPC\_dotProduct\_twoLeader.m} solves the two-leader variant of
-\Cref{sec:model} on the same $(c, \delta)$ grid, with $k = 0.1$, $u_R = 1$,
-and the five-state transition matrix, and saves
-\code{twoLeaders\_1519.mat}, which holds the three strategy matrices.
-\code{make\_figures.m} draws it with \code{plot\_map\_twoLeaders.m} as a
-three-class map and no overlay (\Cref{fig:6}). The figure looks like
-Figure 1.4 but is a different run: rules now also have to survive the
-multipolar state, where each leader gains $k$ in the short run from playing
-power and the regime collapses unless both refrain. The cyclic region is
-therefore larger (it reaches about $\delta = 0.45$ at $c = 1$, against
-$0.2$ in Figure 1.4) and the rules-based region starts at higher $\delta$
-for every $c$. The solver found mixed strategies in a thinner band than in
-the baseline.
-
-\begin{figure}[htbp]
-\centering
-\includegraphics[width=0.62\linewidth]{fig_6_bipolar_world.png}
-\caption{Figure 6 of ``Equilibrium Trade Regimes: Power- vs. Rules-Based'', Rules-based equilibria in a bipolar world (two-leader model)}
-\label{fig:6}
-\begin{minipage}{0.9\linewidth}
-\vspace{4pt}
-\footnotesize\raggedright
-\textit{Notes:} \code{main\_RPC\_dotProduct\_twoLeader.m} $\rightarrow$
-\code{twoLeaders\_1519.mat} $\rightarrow$
-\code{plot\_map\_twoLeaders(\ldots, 'plot\_twoLeaders\_three.png', false, false)}.
 \end{minipage}
 \end{figure}
 
