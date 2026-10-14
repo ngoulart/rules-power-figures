@@ -94,5 +94,9 @@ pure-strategy classification of every map with plain linear algebra: for
 each grid point and each pure pair it solves the Bellman system, checks
 conditions (a) to (d), and applies the selection rule. It agrees with the
 saved data on every cell where the MATLAB solver found a pure strategy, for
-all seven data files, which confirms the reading of the model given above
-and the parameter values reported in \Cref{sec:figures}.
+all seven data files of the four-state model, which confirms the reading of
+the model given above and the parameter values reported in
+\Cref{sec:figures}. The companion script
+\code{python/check\_two\_leaders.py} does the same for the two-leader model
+of P\&P Figure 6 and agrees on all pure cells but two, which the MATLAB
+solver itself flagged as ambiguous and which are drawn red either way.

@@ -4,8 +4,8 @@
 This note documents the code and the parameter values behind the figures
 listed in \path{Figuras_papers.pdf}: Figures 1.4, 1.5, 1.6, 1.9, 1.B.3, and
 1.F.1 of the bipolar model, Figure 6 of the Papers and Proceedings (P\&P)
-paper, and Figure 2.1 of the multipolar model, which is Figure 1 of the P\&P
-paper. \Cref{tab:map} maps each figure to the script that computes it, the
+paper, which uses the two-leader variant of the bipolar model, and Figure 2.1
+of the multipolar model, which is Figure 1 of the P\&P paper. \Cref{tab:map} maps each figure to the script that computes it, the
 data file it reads, and the image it produces. All files sit in the folder
 \code{figures\_code}; the \code{README.md} there explains how to run them.
 
@@ -28,7 +28,7 @@ Figure & Solver script & Data file & Final image (\code{figures/}) \\
 1.4 Symmetric Markovian equilibria & \path{main_RPC.m} & \path{main_2112.mat} & \path{fig_1_4_symmetric_markovian.png} \\
 1.5 Efficient and inefficient equilibria & \path{main_RPC.m} & \path{main_2112.mat} & \path{fig_1_5_efficient_inefficient.png} \\
 1.6 Rules-resistant and rules-compatible power-based equilibria & \path{main_RPC.m} & \path{main_2112.mat} & \path{fig_1_6_rules_resistant_compatible.png} \\
-P\&P Figure 6, Rules-based equilibria in a bipolar world & \path{main_RPC.m} (same run as 1.4) & \path{main_2112.mat} & \path{fig_6_PP_bipolar_world.png} \\
+P\&P Figure 6, Rules-based equilibria in a bipolar world (two-leader model) & \path{main_RPC_dotProduct_twoLeader.m} & \path{twoLeaders_1519.mat} & \path{fig_6_PP_bipolar_world.png} \\
 1.9 Sustainability of a rules-lite regime, $c = 1.5$ & \path{main_uRDelta.m} & \path{main_kappa15_c15.mat} & \path{fig_1_9_rules_lite_c15.png} \\
 1.B.3 Enduring dominance & \path{main_RPC_changingQ22.m} & \path{prop4_{35,60,85,99}.mat} & \path{fig_1_B_3_enduring_dominance.png} \\
 1.F.1 Equilibria under endogenous transitions, $\eta = \bar\eta$ & \path{main_RPC_newEndogenous.m} & \path{endogenous_2213.mat} & \path{fig_1_F_1_endogenous_transitions.png} \\

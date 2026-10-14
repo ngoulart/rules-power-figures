@@ -8,6 +8,7 @@
 %   main_RPC_changingQ22.m   -> prop4_{35,60,85,99}.mat (Figure 1.B.3)
 %   main_RPC_newEndogenous.m -> endogenous_2213.mat    (Figure 1.F.1)
 %   main_uRDelta.m           -> main_kappa15_c15.mat   (Figure 1.9)
+%   main_RPC_dotProduct_twoLeader.m -> twoLeaders_1519.mat (P&P Figure 6, two-leader model)
 % The solver scripts save into the current folder; move their .mat output to data/.
 %
 % Post-processing in Python (run after this script, from the same folder):
@@ -23,7 +24,7 @@ clc;
 clear all;
 close all;
 
-% Figure 1.4 (Symmetric Markovian equilibria) and P&P Figure 6 (identical figure)
+% Figure 1.4 (Symmetric Markovian equilibria)
 data = load('data/main_2112.mat');
 plot_map(data.matrix_lambda1, data.matrix_lambda2, 'plot_RPC.png', false, false);
 
@@ -46,3 +47,7 @@ plot_map(data.matrix_lambda1, data.matrix_lambda2, 'plot_endogenous.png', false,
 % Figure 1.9 (Sustainability of a rules-lite regime, c = 1.5): gamma on the x-axis
 data = load('data/main_kappa15_c15.mat');
 plot_map_gamma(data.matrix_lambda1, data.matrix_lambda2, data.naMask, 'rules_lite_c15.png', false, true);
+
+% P&P Figure 6 (Rules-based equilibria in a bipolar world): two-leader model, three classes
+data = load('data/twoLeaders_1519.mat');
+plot_map_twoLeaders(data.matrix_lambda1, data.matrix_lambda2, data.matrix_lambdaNR, 'plot_twoLeaders_three.png', false, false);

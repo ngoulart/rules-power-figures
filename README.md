@@ -11,7 +11,7 @@ the parameter values of every figure, and the numerical procedure.
 | 1.4 Symmetric Markovian equilibria | `matlab/main_RPC.m` | `data/main_2112.mat` | `make_figures.m` | `figures/fig_1_4_symmetric_markovian.png` |
 | 1.5 Efficient and inefficient equilibria | `matlab/main_RPC.m` | `data/main_2112.mat` | `make_figures.m` + `legend_merger.py` | `figures/fig_1_5_efficient_inefficient.png` |
 | 1.6 Rules-resistant and rules-compatible power-based equilibria | `matlab/main_RPC.m` | `data/main_2112.mat` | `make_figures.m` + `legend_merger.py` | `figures/fig_1_6_rules_resistant_compatible.png` |
-| P&P Figure 6, Rules-based equilibria in a bipolar world | same as Figure 1.4 | `data/main_2112.mat` | `make_figures.m` | `figures/fig_6_PP_bipolar_world.png` |
+| P&P Figure 6, Rules-based equilibria in a bipolar world (two-leader model) | `matlab/main_RPC_dotProduct_twoLeader.m` | `data/twoLeaders_1519.mat` | `make_figures.m` | `figures/fig_6_PP_bipolar_world.png` |
 | 1.9 Sustainability of a rules-lite regime, c = 1.5 | `matlab/main_uRDelta.m` | `data/main_kappa15_c15.mat` | `make_figures.m` | `figures/fig_1_9_rules_lite_c15.png` |
 | 1.B.3 Enduring dominance | `matlab/main_RPC_changingQ22.m` | `data/prop4_{35,60,85,99}.mat` | `make_figures.m` + `image_merger.py` | `figures/fig_1_B_3_enduring_dominance.png` |
 | 1.F.1 Equilibria under endogenous transitions | `matlab/main_RPC_newEndogenous.m` | `data/endogenous_2213.mat` | `make_figures.m` | `figures/fig_1_F_1_endogenous_transitions.png` |
@@ -25,8 +25,9 @@ the parameter values of every figure, and the numerical procedure.
    equilibrium strategy `(lambda1, lambda2)` in two matrices and saves them to a
    `.mat` file in the working folder. These runs take hours (`parfor`).
 2. `make_figures.m` loads the `.mat` files from `data/` and draws the maps with
-   `plot_map.m` (`c` on the horizontal axis) or `plot_map_gamma.m` (`gamma` on
-   the horizontal axis). Colors are a bilinear function of `(lambda1, lambda2)`,
+   `plot_map.m` (`c` on the horizontal axis), `plot_map_gamma.m` (`gamma` on
+   the horizontal axis), or `plot_map_twoLeaders.m` (two-leader model, which
+   has a third strategy probability for the multipolar state). Colors are a bilinear function of `(lambda1, lambda2)`,
    so mixed strategies show up as blended colors.
 3. `legend_merger.py` writes the white "Inefficient ..." labels on the
    social-planner maps; `image_merger.py` assembles the four panels of Figure
@@ -35,6 +36,9 @@ the parameter values of every figure, and the numerical procedure.
 `python/check_pure_equilibria.py` re-derives the pure-strategy classification
 of every map with plain linear algebra (no MATLAB) and checks it against the
 `.mat` files; it agrees on 100% of the pure-strategy cells.
+`python/check_two_leaders.py` does the same for the two-leader model of P&P
+Figure 6 (99.99%: the only two exceptions are cells the solver itself flagged
+as ambiguous, which are drawn red either way).
 
 ## Software
 
@@ -58,12 +62,12 @@ now lives in `plot_map.m` / `plot_map_gamma.m` with the calls in
 fixed-DPI backend and to size its canvas to the legend, so it runs on any
 screen; the published panel had a slightly larger bottom margin.
 
-## Test status (September 23, 2026)
+## Test status (September 23 and October 14, 2026)
 
-- All seven `.m` files pass the MISS_HIT MATLAB parser (`mh_lint`); the
+- All nine `.m` files pass the MISS_HIT MATLAB parser (`mh_lint`); the
   original single-file `plot_main.m` does not, which is why it was split.
-- `make_figures.m`, `plot_map.m`, and `plot_map_gamma.m` were rerun under
-  Octave 8.4 (Docker, Xvfb) on the seven data files and reproduced all nine
+- `make_figures.m` and the three `plot_map*.m` functions were rerun under
+  Octave 8.4 (Docker, Xvfb) on the eight data files and reproduced all ten
   maps with the same regions, colors, curve, and legends as the MATLAB
   originals. Two MATLAB-only constructs had to be substituted in the test copy
   (`handle.Property` assignments and `rgb2ind(RGB, 256)`); they are standard
@@ -71,7 +75,7 @@ screen; the published panel had a slightly larger bottom margin.
 - The solver scripts need MATLAB's Symbolic Math Toolbox and were not rerun.
   They are byte-identical to the scripts stored next to the data files they
   produced (except the three parameter lines of `main_uRDelta.m` listed
-  above), and the data match the independent check in `python/`.
+  above), and the data match the independent checks in `python/`.
   Quick smoke test in MATLAB: set `grid = 4` near the top of a solver script
   (and, without an NVIDIA GPU, replace `gpuArray(...)` by its argument and
   `gather(x)` by `x`); a run then takes about a minute and writes a small

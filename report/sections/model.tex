@@ -93,3 +93,35 @@ turns bipolar); $(0, 1)$ is a rules-compatible power-based equilibrium
 rules-resistant power-based equilibrium (nobody builds and rules would be
 broken). Three-class maps merge the last two classes into ``power-based
 equilibria''.
+
+\paragraph*{Two-leader variant (P\&P Figure 6).}
+The script behind P\&P Figure 6 adds a fifth state $N$ between $\dI$ and
+$\dJ$: a multipolar state in which neither leader dominates and both act at
+once. The transition matrix, with rows and columns ordered $(\hI, \dI, N,
+\dJ, \hJ)$, keeps the baseline rows for the hegemonic states and gives a
+dominant country equal chances $0.45$ of becoming hegemon and of falling
+into $N$, where the world stays with probability $0.1$ or moves to either
+dominance state with probability $0.45$:
+\begin{align*}
+  Q = \begin{pmatrix}
+    0.10 & 0.90 & 0    & 0    & 0    \\
+    0.45 & 0.10 & 0.45 & 0    & 0    \\
+    0    & 0.45 & 0.10 & 0.45 & 0    \\
+    0    & 0    & 0.45 & 0.10 & 0.45 \\
+    0    & 0    & 0    & 0.90 & 0.10
+  \end{pmatrix}.
+\end{align*}
+At $N$ the payoff depends on the pair of actions: $1$ when both play rules,
+$1 - 2k = 0.8$ when $i$ plays rules and $j$ power, $1 + k = 1.1$ in the
+opposite case, and $0.95$, the average of the two asymmetric outcomes, when
+both play power; under regime $P$ both play power. A third probability
+$\lambda_N$ gives the chance that a leader plays rules at $N$ under regime
+$R$, with the joint-support assumption that rules survive there only if both
+leaders play rules, so the continuation under rules carries probability
+$\lambda_N^2$. The value equations and the four conditions above extend
+accordingly, with two additions: $\lambda_N$ is optimal given the other
+leader's $\lambda_N$, and nobody builds rules at $N$ under $P$. The script
+keeps, among multiple solutions, the one with $\lambda_2 = \lambda_N = 1$.
+In the three-class map, rules-based equilibria are $(\lambda_1, \lambda_2,
+\lambda_N) = (1, 1, 1)$, cyclic equilibria have $\lambda_1 = 1$ and rules
+broken at $\dI$ or at $N$, and power-based equilibria have $\lambda_1 = 0$.
