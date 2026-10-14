@@ -14,7 +14,8 @@ ticks are labeled with the nominal bounds.
 At each grid point the script calls MATLAB's symbolic \code{solve} on the
 eight Bellman equations and the four equilibrium conditions of
 \Cref{sec:model}, with the ten unknowns $(V^P, V^R, \lambda_1, \lambda_2)$
-and the restriction $\lambda_1, \lambda_2 \in [0, 1]$. The loop over
+and the restriction $\lambda_1, \lambda_2 \in [0, 1]$ (ten equations, six
+conditions, and thirteen unknowns in the two-leader variant). The loop over
 $\delta$ runs in parallel (\code{parfor}); a full map takes several hours.
 The solver returns every solution, including mixed strategies. The script
 stores $(\lambda_1, \lambda_2)$ in two matrices, one row per $\delta$ and one
@@ -24,8 +25,10 @@ column per $c$, and saves them to a \code{.mat} file.
 When the solver returns several equilibria at a grid point, the script keeps
 the one with $\lambda_2 = 1$ if it is unique. Cells with several solutions
 with $\lambda_2 = 1$, or none, are flagged with the codes $-2$ and $-1$, and
-cells where the solver fails keep \code{NaN}. In the seven data files behind
-the figures no such cell exists: every stored value lies in $[0, 1]$.
+cells where the solver fails keep \code{NaN}. In the seven
+data files of the four-state model no such cell exists: every stored value
+lies in $[0, 1]$. The two-leader file has two cells flagged $-1$; they lie
+inside the power-based region and are drawn red like their neighbors.
 
 \paragraph*{Mixed strategies and the blurred boundary.}
 In the final data $\lambda_2$ is always $0$ or $1$, while $\lambda_1$ takes
