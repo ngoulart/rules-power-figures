@@ -16,7 +16,7 @@ $k = 0.1$, $u_R = 1$, the transition matrix $Q$ above, and the grid of
 Figure & Axes & Departure from the baseline \\
 \midrule
 1.4 & $c \in [0, 5]$, $\delta \in [0, 1]$ & none \\
-P\&P 6 & $c \in [0, 5]$, $\delta \in [0, 1]$ & two-leader variant: fifth state $N$, $5 \times 5$ transition matrix, payoffs at $N$ by action pair, third probability $\lambda_N$ (\Cref{sec:model}) \\
+Main paper, Figure 6 & $c \in [0, 5]$, $\delta \in [0, 1]$ & two-leader variant: fifth state $N$, $5 \times 5$ transition matrix, payoffs at $N$ by action pair, third probability $\lambda_N$ (\Cref{sec:model}) \\
 1.5 & same data as 1.4 & white curve $c = f(\delta)$, the planner's threshold (\Cref{sec:fig15}) \\
 1.6 & same data as 1.4 & four-class colors and the same white curve \\
 1.9 & $\gamma \in [0, 0.1]$, $\delta \in [0, 1]$ & $c = 1.5$; rules payoffs $(1 + \gamma,\, 1 + \gamma,\, 1 - \kappa\gamma,\, 1 - \kappa\gamma)$ at $(\hI, \dI, \dJ, \hJ)$ with $\kappa = 1.5$ \\
@@ -248,9 +248,11 @@ $\rightarrow$ \code{endogenous\_2213.mat} $\rightarrow$
 \end{minipage}
 \end{figure}
 
-\subsection{P\&P Figure 6, Rules-based equilibria in a bipolar world}
+\subsection{Figure 6 of the main paper, Rules-based equilibria in a bipolar world}
 \label{sec:fig6}
 
+This figure belongs to the main paper, ``Equilibrium Trade Regimes: Power-
+vs. Rules-Based'' (Carvalho, Monte, and Ornelas, CEPR DP 20751).
 \code{main\_RPC\_dotProduct\_twoLeader.m} solves the two-leader variant of
 \Cref{sec:model} on the same $(c, \delta)$ grid, with $k = 0.1$, $u_R = 1$,
 and the five-state transition matrix, and saves
@@ -267,8 +269,8 @@ the baseline.
 
 \begin{figure}[htbp]
 \centering
-\includegraphics[width=0.62\linewidth]{fig_6_PP_bipolar_world.png}
-\caption{P\&P Figure 6, Rules-based equilibria in a bipolar world (two-leader model)}
+\includegraphics[width=0.62\linewidth]{fig_6_bipolar_world.png}
+\caption{Figure 6 of ``Equilibrium Trade Regimes: Power- vs. Rules-Based'', Rules-based equilibria in a bipolar world (two-leader model)}
 \label{fig:6}
 \begin{minipage}{0.9\linewidth}
 \vspace{4pt}

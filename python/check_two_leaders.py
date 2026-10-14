@@ -1,5 +1,5 @@
 """Re-derives the pure-strategy equilibrium map of the two-leader (bipolar)
-model behind P&P Figure 6 with plain linear algebra and compares it with the
+model behind Figure 6 of the main paper (Equilibrium Trade Regimes) with plain linear algebra and compares it with the
 .mat file saved by main_RPC_dotProduct_twoLeader.m (no MATLAB needed).
 
 States are ordered (h_i, d_i, N, d_j, h_j), where N is the multipolar state in
@@ -94,7 +94,7 @@ m = loadmat(f"{DATA}/twoLeaders_1519.mat")
 l1, l2, lN = m["matrix_lambda1"], m["matrix_lambda2"].astype(float), m["matrix_lambdaNR"].astype(float)
 mixed = (l1 > 0) & (l1 < 1)
 agree = (np.round(l1) == mine[:, :, 0]) & (l2 == mine[:, :, 1]) & (lN == mine[:, :, 2])
-print(f"P&P Figure 6 (twoLeaders_1519)   mixed cells {100 * mixed.mean():4.1f}%   "
+print(f"Main-paper Figure 6 (twoLeaders_1519)   mixed cells {100 * mixed.mean():4.1f}%   "
       f"agreement on pure cells {100 * agree[~mixed].mean():6.2f}%   "
       f"disagreeing pure cells {int((~agree & ~mixed).sum())}")
 bad = np.argwhere(~agree & ~mixed)
