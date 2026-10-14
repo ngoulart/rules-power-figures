@@ -1,0 +1,22 @@
+# LaTeX build files
+*.aux
+*.log
+*.out
+*.fls
+*.fdb_latexmk
+*.synctex.gz
+*.toc
+*.bbl
+*.blg
+
+# Python
+__pycache__/
+*.pyc
+
+# Intermediate images written by make_figures.m and the Python scripts
+matlab/*.png
+python/*.png
+python/*.pdf
+
+# macOS
+.DS_Store

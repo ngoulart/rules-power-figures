@@ -1,0 +1,98 @@
+\section{Numerical procedure and plotting}
+\label{sec:procedure}
+
+\paragraph*{Grid.}
+Each solver script evaluates the model on a grid of $201 \times 201$ equally
+spaced points, $\delta \in [0, 1]$ (step $0.005$) against $c \in [0, 5]$
+(step $0.025$), or against $\gamma \in [0, 0.1]$ (step $0.0005$) in Figure
+1.9. The last row and column ($\delta = 1$ and $c = 5$, where the system is
+singular or degenerate) are dropped before plotting, so every map shows a
+$200 \times 200$ grid with $\delta \leq 0.995$ and $c \leq 4.975$. The axis
+ticks are labeled with the nominal bounds.
+
+\paragraph*{Solver.}
+At each grid point the script calls MATLAB's symbolic \code{solve} on the
+eight Bellman equations and the four equilibrium conditions of
+\Cref{sec:model}, with the ten unknowns $(V^P, V^R, \lambda_1, \lambda_2)$
+and the restriction $\lambda_1, \lambda_2 \in [0, 1]$. The loop over
+$\delta$ runs in parallel (\code{parfor}); a full map takes several hours.
+The solver returns every solution, including mixed strategies. The script
+stores $(\lambda_1, \lambda_2)$ in two matrices, one row per $\delta$ and one
+column per $c$, and saves them to a \code{.mat} file.
+
+\paragraph*{Selection among multiple solutions.}
+When the solver returns several equilibria at a grid point, the script keeps
+the one with $\lambda_2 = 1$ if it is unique. Cells with several solutions
+with $\lambda_2 = 1$, or none, are flagged with the codes $-2$ and $-1$, and
+cells where the solver fails keep \code{NaN}. In the seven data files behind
+the figures no such cell exists: every stored value lies in $[0, 1]$.
+
+\paragraph*{Mixed strategies and the blurred boundary.}
+In the final data $\lambda_2$ is always $0$ or $1$, while $\lambda_1$ takes
+interior values in a band along the boundary between the rules-based and
+the power-based regions. In that band no pure-strategy symmetric equilibrium
+exists: the dominant country would keep rules, and the hegemon is
+indifferent between building or not, so it builds with a probability that
+rises continuously with $\delta$ from $0$ to $1$. The band widens as $c$
+grows (for $c = 2$ it covers roughly $\delta \in [0.78, 0.88]$, for $c = 4$
+it reaches the top of the map), which is why the green region fades into the
+red or orange region instead of ending at a sharp line. The one exception is
+the column $c = 1$, where the hegemon is exactly indifferent under cyclic
+play.
+
+\paragraph*{Colors.}
+Each pixel's RGB color is an affine function of $(\lambda_1, \lambda_2)$ with
+an interaction term, fitted so that the four pure profiles map to the four
+anchor colors in \Cref{tab:colors}. For four-class maps,
+\begin{align*}
+  R &= 0.8471 - 0.7294\,\lambda_1 + 0.0941\,\lambda_2 - 0.0549\,\lambda_1\lambda_2, \\
+  G &= 0.1059 + 0.2863\,\lambda_1 + 0.3647\,\lambda_2 - 0.1569\,\lambda_1\lambda_2, \\
+  B &= 0.2510 + 0.5333\,\lambda_1 - 0.0157\,\lambda_2 - 0.3686\,\lambda_1\lambda_2,
+\end{align*}
+and for three-class maps the coefficients on $\lambda_2$ are replaced so that
+$(0, 1)$ and $(0, 0)$ both map to red ($R = 0.8471 - 0.7294\,\lambda_1 +
+0.0392\,\lambda_1\lambda_2$, $G = 0.1059 + 0.2863\,\lambda_1 +
+0.2078\,\lambda_1\lambda_2$, $B = 0.2510 + 0.5333\,\lambda_1 -
+0.3843\,\lambda_1\lambda_2$). Mixed values of $\lambda_1$ therefore appear
+as blends of the anchor colors.
+
+\begin{table}[htbp]
+\caption{Anchor colors of the equilibrium maps}
+\label{tab:colors}
+\centering
+\small
+\begin{tabular}{@{}llll@{}}
+\toprule
+Equilibrium class & $(\lambda_1, \lambda_2)$ & Color & RGB \\
+\midrule
+Rules-based & $(1, 1)$ & green & $(38, 153, 102)$ \\
+Cyclic & $(1, 0)$ & blue & $(30, 100, 200)$ \\
+Rules-compatible power-based & $(0, 1)$ & orange (four-class maps only) & $(240, 120, 60)$ \\
+Rules-resistant power-based & $(0, 0)$ & red & $(216, 27, 64)$ \\
+\bottomrule
+\end{tabular}
+\begin{minipage}{\linewidth}
+\vspace{4pt}
+\footnotesize
+\textit{Notes:} In three-class maps the rules-compatible class is drawn in
+red as well. The same green and blue are used for the regions of Figure 2.1.
+\end{minipage}
+\end{table}
+
+\paragraph*{Output and post-processing.}
+\code{make\_figures.m} loads each data file and calls \code{plot\_map.m}
+(or \code{plot\_map\_gamma.m} for Figure 1.9), which builds the RGB image,
+draws it with \code{imshow}, adds the axes and the legend, and writes a PNG
+of $1094 \times 973$ pixels. The white labels of Figures 1.5 and 1.6 are
+written on those PNGs by \code{legend\_merger.py}, and the four panels of
+Figure 1.B.3 are cropped, titled, and stacked by \code{image\_merger.py},
+which renders the panel titles with \LaTeX.
+
+\paragraph*{Independent check.}
+The script \code{python/check\_pure\_equilibria.py} recomputes the
+pure-strategy classification of every map with plain linear algebra: for
+each grid point and each pure pair it solves the Bellman system, checks
+conditions (a) to (d), and applies the selection rule. It agrees with the
+saved data on every cell where the MATLAB solver found a pure strategy, for
+all seven data files, which confirms the reading of the model given above
+and the parameter values reported in \Cref{sec:figures}.

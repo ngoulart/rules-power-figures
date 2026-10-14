@@ -1,0 +1,47 @@
+\section{Purpose}
+\label{sec:purpose}
+
+This note documents the code and the parameter values behind the figures
+listed in \path{Figuras_papers.pdf}: Figures 1.4, 1.5, 1.6, 1.9, 1.B.3, and
+1.F.1 of the bipolar model, Figure 6 of the Papers and Proceedings (P\&P)
+paper, and Figure 2.1 of the multipolar model, which is Figure 1 of the P\&P
+paper. \Cref{tab:map} maps each figure to the script that computes it, the
+data file it reads, and the image it produces. All files sit in the folder
+\code{figures\_code}; the \code{README.md} there explains how to run them.
+
+The bipolar figures are equilibrium maps: for every point of a grid of
+parameter values, a MATLAB script solves the model, records the symmetric
+Markov equilibrium, and saves the result to a \code{.mat} file. A separate
+plotting function draws the maps from the saved files, and two short Python
+scripts add labels and assemble panels. The multipolar figure plots
+closed-form expressions in Python and needs no solver.
+
+\begin{table}[htbp]
+\caption{From figure to code}
+\label{tab:map}
+\centering
+\footnotesize
+\begin{tabular}{@{}p{3.9cm}p{3.1cm}p{2.9cm}p{5.2cm}@{}}
+\toprule
+Figure & Solver script & Data file & Final image (\code{figures/}) \\
+\midrule
+1.4 Symmetric Markovian equilibria & \path{main_RPC.m} & \path{main_2112.mat} & \path{fig_1_4_symmetric_markovian.png} \\
+1.5 Efficient and inefficient equilibria & \path{main_RPC.m} & \path{main_2112.mat} & \path{fig_1_5_efficient_inefficient.png} \\
+1.6 Rules-resistant and rules-compatible power-based equilibria & \path{main_RPC.m} & \path{main_2112.mat} & \path{fig_1_6_rules_resistant_compatible.png} \\
+P\&P Figure 6, Rules-based equilibria in a bipolar world & \path{main_RPC.m} (same run as 1.4) & \path{main_2112.mat} & \path{fig_6_PP_bipolar_world.png} \\
+1.9 Sustainability of a rules-lite regime, $c = 1.5$ & \path{main_uRDelta.m} & \path{main_kappa15_c15.mat} & \path{fig_1_9_rules_lite_c15.png} \\
+1.B.3 Enduring dominance & \path{main_RPC_changingQ22.m} & \path{prop4_{35,60,85,99}.mat} & \path{fig_1_B_3_enduring_dominance.png} \\
+1.F.1 Equilibria under endogenous transitions, $\eta = \bar\eta$ & \path{main_RPC_newEndogenous.m} & \path{endogenous_2213.mat} & \path{fig_1_F_1_endogenous_transitions.png} \\
+2.1 Multipolar fragmentation and persistence (P\&P Figure 1) & \path{persistence.py} (Python) & none & \path{fig_2_1_multipolar_persistence.pdf} \\
+\bottomrule
+\end{tabular}
+\begin{minipage}{\linewidth}
+\vspace{4pt}
+\footnotesize
+\textit{Notes:} MATLAB scripts and data files are in \code{matlab/} and
+\code{matlab/data/}; \code{make\_figures.m} draws every map from the data
+files. Figures 1.5 and 1.6 get their white labels from
+\code{legend\_merger.py}; the four panels of Figure 1.B.3 are assembled by
+\code{image\_merger.py}. The Python script for Figure 2.1 is in \code{python/}.
+\end{minipage}
+\end{table}

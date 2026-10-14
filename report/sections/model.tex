@@ -1,0 +1,95 @@
+\section{The bipolar model as coded}
+\label{sec:model}
+
+\paragraph*{States, regimes, and strategies.}
+Two countries, $i$ and $j$, interact in discrete time and discount the future
+at rate $\delta$. The state $s \in \{\hI, \dI, \dJ, \hJ\}$ records who leads:
+$i$ is the hegemon at $\hI$, $i$ is the dominant country of a bipolar world
+at $\dI$, and symmetrically for $j$. The code indexes the states $1$ to $4$
+in this order. The regime $\rho \in \{P, R\}$ (power or rules) is a second
+state variable that persists until a country changes it. Under $P$ at $\hI$,
+the hegemon builds rules with probability $\lambda_1$ and pays the building
+cost $c$ once. Under $R$ at $\dI$, the dominant country keeps the rules with
+probability $\lambda_2$; breaking them costs nothing and returns the regime
+to $P$. Country $j$ uses the same $(\lambda_1, \lambda_2)$ at $\hJ$ and
+$\dJ$, so a symmetric Markov equilibrium is a pair $(\lambda_1, \lambda_2)$.
+Two further restrictions are imposed as constraints: a hegemon never
+abandons rules that already exist, and no country builds rules in a
+dominance state.
+
+\paragraph*{Payoffs.}
+Country $i$'s per-period payoff depends on the state and the regime.
+Under rules it equals $u_R = 1$ in every state. Under power it equals
+\begin{align*}
+  u^P(\hI) = 0, \qquad u^P(\dI) = 1 + k, \qquad u^P(\dJ) = 1 - 2k, \qquad u^P(\hJ) = 0,
+\end{align*}
+with $k = 0.1$ in every figure. The joint per-period payoff is therefore
+$2$ under rules, $2 - k = 1.9$ in a dominance state under power (the
+collective-action loss), and $0$ in a hegemonic state under power. The
+building cost $c$ is the horizontal axis of most maps.
+
+\paragraph*{Transitions.}
+The state follows a Markov chain with transition matrix $Q$, rows and
+columns ordered $(\hI, \dI, \dJ, \hJ)$:
+\begin{align*}
+  Q = \begin{pmatrix}
+    0.10 & 0.90 & 0    & 0    \\
+    0.45 & 0.10 & 0.45 & 0    \\
+    0    & 0.45 & 0.10 & 0.45 \\
+    0    & 0    & 0.90 & 0.10
+  \end{pmatrix}.
+\end{align*}
+Hegemony is followed by the dominance of the same country with probability
+$0.9$, and a dominant country either becomes hegemon or loses its lead with
+equal probability $0.45$. The persistence of the dominance states,
+$q_{\dI,\dI} = q_{\dJ,\dJ} = 0.1$, is the parameter varied in Figure 1.B.3.
+Transitions do not depend on the regime except in Figure 1.F.1, where
+choosing power in a dominance state raises the chance of staying dominant.
+
+\paragraph*{Value functions.}
+Let $V^{\rho}_s$ denote $i$'s value at state $s$ under regime $\rho$ at the
+start of a period, $V^{\rho} = (V^{\rho}_1, \dots, V^{\rho}_4)'$, $Q_s$ the
+$s$-th row of $Q$, and $Q^P_s$ the corresponding row under power ($Q^P = Q$
+except in Figure 1.F.1). The scripts solve the system
+\begin{align*}
+  V^P_1 &= \lambda_1 \big[u^R_1 - c + \delta Q_1 V^R\big] + (1 - \lambda_1) \big[u^P_1 + \delta Q^P_1 V^P\big], \\
+  V^R_1 &= u^R_1 + \delta Q_1 V^R, \\
+  V^P_2 &= u^P_2 + \delta Q^P_2 V^P, \\
+  V^R_2 &= \lambda_2 \big[u^R_2 + \delta Q_2 V^R\big] + (1 - \lambda_2) \big[u^P_2 + \delta Q^P_2 V^P\big], \\
+  V^P_3 &= u^P_3 + \delta Q^P_3 V^P, \\
+  V^R_3 &= \lambda_2 \big[u^R_3 + \delta Q_3 V^R\big] + (1 - \lambda_2) \big[u^P_3 + \delta Q^P_3 V^P\big], \\
+  V^P_4 &= \lambda_1 \big[u^R_4 + \delta Q_4 V^R\big] + (1 - \lambda_1) \big[u^P_4 + \delta Q^P_4 V^P\big], \\
+  V^R_4 &= u^R_4 + \delta Q_4 V^R,
+\end{align*}
+where $u^{\rho}_s$ is $i$'s payoff at state $s$ under $\rho$. At $\hJ$ it is
+$j$ who pays the building cost, so $i$'s value under power at $\hJ$ carries
+no cost term.
+
+\paragraph*{Equilibrium conditions.}
+Write the one-shot deviation values at $\hI$ under $P$ (build or not) and at
+$\dI$ under $R$ (keep or break) as
+\begin{align*}
+  D^P_1 &= u^P_1 + \delta Q^P_1 V^P, & D^R_1 &= u^R_1 - c + \delta Q_1 V^R, \\
+  D^P_2 &= u^P_2 + \delta Q^P_2 V^P, & D^R_2 &= u^R_2 + \delta Q_2 V^R.
+\end{align*}
+A pair $(\lambda_1, \lambda_2)$ together with $(V^P, V^R)$ is an equilibrium
+when it solves the system above and satisfies four conditions:
+\begin{enumerate}
+  \item[(a)] $\lambda_1 = 1$ if $D^R_1 > D^P_1$, $\lambda_1 = 0$ if $D^R_1 < D^P_1$, and $\lambda_1 \in (0,1)$ only if $D^R_1 = D^P_1$;
+  \item[(b)] the same for $\lambda_2$ with $D^R_2$ and $D^P_2$;
+  \item[(c)] $D^P_1 \leq u^R_1 + \delta Q_1 V^R$: at $\hI$ under $R$ the hegemon keeps the rules;
+  \item[(d)] $D^P_2 \geq u^R_2 - c + \delta Q_2 V^R$: at $\dI$ under $P$ the dominant country does not build rules.
+\end{enumerate}
+Conditions (a) and (b) are the optimality of the two probabilities; (c) and
+(d) are the two restrictions on off-path behavior.
+
+\paragraph*{Classification of equilibria.}
+The maps color each grid point by the equilibrium pair:
+$(\lambda_1, \lambda_2) = (1, 1)$ is a rules-based equilibrium (the hegemon
+builds rules and the dominant country keeps them); $(1, 0)$ is a cyclic
+equilibrium (rules are built under hegemony and broken as soon as the world
+turns bipolar); $(0, 1)$ is a rules-compatible power-based equilibrium
+(nobody builds, but rules would be kept if they existed); $(0, 0)$ is a
+rules-resistant power-based equilibrium (nobody builds and rules would be
+broken). Three-class maps merge the last two classes into ``power-based
+equilibria''.
